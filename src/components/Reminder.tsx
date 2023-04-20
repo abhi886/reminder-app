@@ -39,7 +39,7 @@ const Reminder = () => {
   return (
     <div className='App'>
       <button
-        className='btn btn-primary outline'
+        className='btn btn-primary outline mb-4'
         onClick={() => {
           createReminder();
         }}
