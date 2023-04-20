@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Reminder from "../models/reminder";
 
 interface ReminderListProps {
@@ -16,9 +17,9 @@ const ReminderList = ({
     <ul className='list-group'>
       {items.map((item) => (
         <li className='list-group-item' key={item.id}>
-          <a href={`/contacts/2`}>
+          <Link to={`/reminder/${item.id}`}>
             {item.id}. {item.title}
-          </a>
+          </Link>
 
           <div className='d-flex justify-content-end'>
             <button
