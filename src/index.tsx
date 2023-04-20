@@ -6,12 +6,19 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ErrorPage from "./components/error-page";
+import ReminderView from "./components/ReminderView";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "reminder/:reminderId",
+        element: <ReminderView />,
+      },
+    ],
   },
 ]);
 const root = ReactDOM.createRoot(

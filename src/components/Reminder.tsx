@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import ReminderList from "../components/ReminderList";
 import ReminderType from "../models/reminder";
 import apiClient from "../services/api-client";
@@ -38,19 +39,22 @@ const Reminder = () => {
   }
   return (
     <div className='App'>
-      <button
-        className='btn btn-primary outline mb-4'
-        onClick={() => {
-          createReminder();
-        }}
-      >
-        Add
-      </button>
-      <ReminderList
-        items={data}
-        updateReminder={updateReminder}
-        deleteReminder={deleteReminder}
-      />
+      <div>
+        <button
+          className='btn btn-primary outline mb-4'
+          onClick={() => {
+            createReminder();
+          }}
+        >
+          Add
+        </button>
+        <ReminderList
+          items={data}
+          updateReminder={updateReminder}
+          deleteReminder={deleteReminder}
+        />
+      </div>
+     
     </div>
   );
 };
