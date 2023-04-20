@@ -16,7 +16,10 @@ const ReminderList = ({
     <ul className='list-group'>
       {items.map((item) => (
         <li className='list-group-item' key={item.id}>
-          {item.id}. {item.title}
+          <a href={`/contacts/2`}>
+            {item.id}. {item.title}
+          </a>
+
           <div className='d-flex justify-content-end'>
             <button
               className='btn btn-outline-secondary'
