@@ -1,53 +1,45 @@
-import React, { useEffect, useState } from "react";
 import "./App.css";
 import ReminderList from "./components/ReminderList";
 import Reminder from "./models/reminder";
 import apiClient from "./services/api-client";
 import todosService from "./services/todos-service";
+import useTodos from "./hooks/useTodos";
 
 function App() {
-  const [reminders, setReminders] = useState<Reminder[]>([]);
+  const { data, setData } = useTodos();
   function updateReminder(item: Reminder): any {
-    const originalReminders = [...reminders];
+    const originalReminders = [...data];
     const updatedReminders = { ...item, title: item.title + "!" };
-    setReminders(
-      reminders.map((reminder) =>
+    setData(
+      data.map((reminder) =>
         reminder.id === item.id ? updatedReminders : reminder
       )
     );
     apiClient.patch(`/todos/ ${item.id}`, updatedReminders).catch((err) => {
       console.log(err);
-      setReminders(originalReminders);
+      setData(originalReminders);
     });
   }
   function createReminder() {
     const newTodos = {
-      id: reminders.length + 1,
+      id: data.length + 1,
       title: "Added Title",
       userId: 1,
       completed: true,
     };
     todosService
       .create(newTodos)
-      .then((res) => setReminders([newTodos, ...reminders]))
+      .then((res) => setData([newTodos, ...data]))
       .catch((err) => console.log(err));
   }
   function deleteReminder(id: number) {
-    const originalReminders = [...reminders];
-    setReminders(reminders.filter((reminder) => reminder.id !== id));
+    const originalReminders = [...data];
+    setData(data.filter((d) => d.id !== id));
     apiClient.delete(`/todos/${id}`).catch((err) => {
-      setReminders(originalReminders);
+      setData(originalReminders);
     });
   }
-  useEffect(() => {
-    const { request, cancel } = todosService.getAll<Reminder>();
-    request
-      .then((res) => {
-        setReminders(res.data);
-      })
-      .catch((e) => console.log({ error: e }));
-    return () => cancel();
-  }, []);
+
   return (
     <div className='App'>
       <button
@@ -59,7 +51,7 @@ function App() {
         Add
       </button>
       <ReminderList
-        items={reminders}
+        items={data}
         updateReminder={updateReminder}
         deleteReminder={deleteReminder}
       />

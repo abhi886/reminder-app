@@ -9,8 +9,8 @@ interface ReminderListProps {
 
 const ReminderList = ({
   items,
-  updateReminder,
   deleteReminder,
+  updateReminder,
 }: ReminderListProps) => {
   return (
     <ul>
