@@ -7,6 +7,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ErrorPage from "./components/error-page";
 import ReminderView from "./components/ReminderView";
+import { loader as ReminderViewLoader } from "./components/ReminderView";
 
 const router = createBrowserRouter([
   {
@@ -15,8 +16,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "reminder/:reminderId",
+        path: "reminder/:id",
         element: <ReminderView />,
+        loader: ReminderViewLoader,
+        errorElement: <ErrorPage />,
       },
     ],
   },
