@@ -15,6 +15,9 @@ class HttpService {
     });
     return { request, cancel: () => controller.abort() };
   }
+  getOne<T>(id: any) {
+    return apiClient.get<T[]>(this.endpoint + id);
+  }
 
   create<T>(entity: T) {
     return apiClient.post(this.endpoint, entity);
