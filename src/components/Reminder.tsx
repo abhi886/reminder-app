@@ -1,4 +1,3 @@
-import { Outlet } from "react-router-dom";
 import ReminderList from "../components/ReminderList";
 import ReminderType from "../models/reminder";
 import apiClient from "../services/api-client";
@@ -54,7 +53,6 @@ const Reminder = () => {
           deleteReminder={deleteReminder}
         />
       </div>
-     
     </div>
   );
 };
